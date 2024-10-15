@@ -37,35 +37,35 @@ export const PanteonDashboardPage = () => {
             key: 'rank',
             dataIndex: 'rank',
             title: 'Rank',
-            responsive: ['xs'],
+            responsive: ['xs', 'sm', 'md'],
             render: (text: string) => text
           },
           {
             key: 'id',
             dataIndex: 'id',
             title: 'ID',
-            responsive: ['md'],
+            responsive: ['sm','md'],
             render: (text: string) => text
           },
           {
             key: 'username',
             dataIndex: 'username',
             title: 'Username',
-            responsive: ['xs'],
+            responsive: ['xs', 'md'],
             render: (text: string) => text
           },
           {
             key: 'country',
             dataIndex: 'country',
             title: 'Country',
-            responsive: ['md'],
+            responsive: ['xl'],
             render: (text: string) => text
           },
           {
             key: 'score',
             dataIndex: 'score',
             title: 'Score',
-            responsive: ['md'],
+            responsive: ['xl'],
             render: (text: number) => text
           }
         ]}

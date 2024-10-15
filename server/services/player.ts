@@ -3,6 +3,7 @@ import { redis2Array } from '../helpers/redis';
 import Player from '../models/player/player';
 
 export const getAllPlayersById = async (id: string) => {
+  console.log('asdasd')
   try {
     const topPlayers: any[] = redis2Array(
       await redis.sendCommand(['ZREVRANGE', 'scores', '0', '99', 'WITHSCORES'])
@@ -32,8 +33,8 @@ export const getAllPlayersById = async (id: string) => {
         await redis.sendCommand([
           'ZREVRANGE',
           'scores',
-          (currentPlayerRank - 2).toString(),
           (currentPlayerRank + 3).toString(),
+          (currentPlayerRank - 2).toString(),
           'WITHSCORES'
         ])
       );

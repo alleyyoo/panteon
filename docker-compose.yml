@@ -13,6 +13,7 @@ services:
       - redis
     volumes:
       - ./server:/app
+      - /app/node_modules
     command: npm run start:dev
 
   client:
@@ -24,7 +25,8 @@ services:
       - server
     volumes:
       - ./client:/app
-    command: npm start
+      - /app/node_modules
+    command: npm run start
 
   mongo:
     image: mongo:latest
@@ -46,8 +48,7 @@ services:
     volumes:
       - ./server:/server
       - ./client:/client
-      - /app/node_modules
-    working_dir: /app
+    working_dir: /
     tty: true
     depends_on:
       - server
