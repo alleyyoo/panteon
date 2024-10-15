@@ -1,0 +1,57 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/panteon
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+    volumes:
+      - ./server:/app
+    command: npm run start:dev
+
+  client:
+    build: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+    command: npm start
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  panteon:
+    image: node:18-alpine
+    container_name: panteon
+    volumes:
+      - ./server:/server
+      - ./client:/client
+      - /app/node_modules
+    working_dir: /app
+    tty: true
+    depends_on:
+      - server
+      - client
+
+volumes:
+  mongo-data:
